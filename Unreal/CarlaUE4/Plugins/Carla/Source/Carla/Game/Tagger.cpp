@@ -88,9 +88,10 @@ FLinearColor ATagger::GetActorLabelColor(const AActor &Actor, const crp::CityObj
   // Encode label and id like semantic segmentation does
   // TODO: Steal bits from R channel and maybe A channel?
   FLinearColor Color(0.0f, 0.0f, 0.0f, 1.0f);
-  Color.R = CastEnum(Label) / 255.0f;
-  Color.G = ((id & 0x00ff) >> 0) / 255.0f;
-  Color.B = ((id & 0xff00) >> 8) / 255.0f;
+  Color.R = ((id & 0xff0000) >> 16) / 255.0f;
+  Color.G = ((id & 0x00ff00) >> 8) / 255.0f;
+  Color.B = ((id & 0x0000ff) >> 0) / 255.0f;  
+  Color.A = CastEnum(Label) / 255.0f;
 
   return Color;
 }
