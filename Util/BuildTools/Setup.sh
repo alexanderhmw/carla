@@ -604,7 +604,7 @@ cp -p -r ${SQLITE_FULL_LIB} ${LIBCARLA_INSTALL_SERVER_FOLDER}
 # -- Get and compile PROJ ------------------------------------------------------
 # ==============================================================================
 
-PROJ_VERSION=proj-7.2.1
+PROJ_VERSION=proj-9.2.1
 PROJ_REPO=https://download.osgeo.org/proj/${PROJ_VERSION}.tar.gz
 
 PROJ_TAR=${PROJ_VERSION}.tar.gz
@@ -629,9 +629,13 @@ else
   mkdir -p ${PROJ_SRC_DIR}/build
   mkdir -p ${PROJ_INSTALL_DIR}
 
+  sed -i 's;#include <string>;#include <string>\n#include <stdint.h>\n#include <cstdint>;g' ${PROJ_SRC_DIR}/src/proj_json_streaming_writer.hpp
+  sed -i 's;#include <string>;#include <string>\n#include <stdint.h>\n#include <cstdint>;;g' ${PROJ_SRC_DIR}/src/proj_json_streaming_writer.cpp
+
   pushd ${PROJ_SRC_DIR}/build >/dev/null
 
   cmake -G "Ninja" .. \
+      -DCMAKE_C_FLAGS="-fPIC" \
       -DCMAKE_CXX_FLAGS="-std=c++14 -fPIC" \
       -DSQLITE3_INCLUDE_DIR=${SQLITE_INCLUDE_DIR} -DSQLITE3_LIBRARY=${SQLITE_LIB} \
       -DEXE_SQLITE3=${SQLITE_EXE} \

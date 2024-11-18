@@ -13,6 +13,8 @@
 #include <string>
 #include <sys/stat.h>
 
+typedef unsigned char uint8_t;
+
 namespace carla {
 namespace client {
 
