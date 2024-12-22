@@ -91,7 +91,6 @@ FLinearColor ATagger::GetActorLabelColor(const AActor &Actor, const crp::CityObj
   Color.R = ((id & 0xff0000) >> 16) / 255.0f;
   Color.G = ((id & 0x00ff00) >> 8) / 255.0f;
   Color.B = ((id & 0x0000ff) >> 0) / 255.0f;  
-  Color.A = CastEnum(Label) / 255.0f;
 
   return Color;
 }
