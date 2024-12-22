@@ -313,7 +313,7 @@ carla_string_option (
 carla_string_option (
   CARLA_PROJ_VERSION
   "Target PROJ version."
-  7.2.1
+  9.5.1
 )
 
 carla_string_option (
